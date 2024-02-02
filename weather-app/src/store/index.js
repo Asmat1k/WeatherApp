@@ -2,12 +2,16 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    KEY: '08789ab932af5d6de716da1eaa4cfca7',
     currentPosition: '',
     lat: 0,
     lon: 0,
     units: 'metric'
   },
   getters: {
+    KEY: state => {
+      return state.KEY;
+    },
     currentPosition: state => {
       return state.currentPosition;
     },
@@ -34,7 +38,7 @@ export default createStore({
   },
   actions: {
     setLatAndLon: async (context, payload) => {
-      const URL = `https://api.openweathermap.org/geo/1.0/direct?q=${payload}&limit=5&appid=08789ab932af5d6de716da1eaa4cfca7`;
+      const URL = `https://api.openweathermap.org/geo/1.0/direct?q=${payload}&limit=5&appid=${context.getters.KEY}`;
       const response = await fetch(URL);
       const data = await response.json();
       const { lat, lon } = data[0];
