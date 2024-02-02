@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <CurrnetWeather/>
+    <CitySearch/>
   </div>
 </template>
 
 <script>
-import CurrnetWeather from '@/components/CurrentWeather.vue'
+import CitySearch from '@/components/CitySearch.vue'
 
 export default {
   name: 'MainView',
   components: {
-    CurrnetWeather
+    CitySearch
   }
 }
 </script>

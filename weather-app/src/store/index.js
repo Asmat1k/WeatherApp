@@ -30,7 +30,7 @@ export default createStore({
       state.currentPosition = payload;
     },
     setLat: (state, payload) => {
-      state.lat = payload;
+      state.lat = payload;  
     },
     setLon: (state, payload) => {
       state.lon = payload;
