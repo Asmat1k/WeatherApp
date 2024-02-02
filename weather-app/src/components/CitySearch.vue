@@ -1,14 +1,13 @@
 <template>
-  <form @submit.prevent="onSubmit">
+  <form class='form' @submit.prevent="onSubmit">
     <MyInput
       id="city"
       v-model="city"
       maxlength="15"
-      :placeholder="'City'"
+      :placeholder="'City...'"
     />
     <MyButton type="submit" class="">update</MyButton>
   </form>
-  <div v-if="isError" class="error">wrong place!</div>
 </template>
 
 <script>
@@ -27,12 +26,12 @@ export default {
           await this.$store.dispatch('setLatAndLon', this.city);
           this.city = '';
         } catch {
-          this.setIsError();
+          this.setIsError(true);
         }
       }
     },
-    setIsError() {
-      this.isError = !this.isError;
+    setIsError(payload) {
+      this.isError = payload;
     }
   },
   async mounted() {
@@ -42,5 +41,15 @@ export default {
 </script>
 
 <style scoped>
-
+  .form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .error {
+    padding: 5px;
+    color: white;
+    text-align: center;
+    text-decoration: underline;
+  }
 </style>
