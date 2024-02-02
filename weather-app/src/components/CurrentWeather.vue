@@ -1,15 +1,12 @@
 <template>
-  <div class="hello">
-    HELLO
+  <div class="container">
+    CurrentWeather
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+  name: 'CurrentWeather',
 }
 </script>
 
