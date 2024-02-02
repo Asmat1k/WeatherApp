@@ -7,6 +7,14 @@
 <script>
 export default {
   name: 'CurrentWeather',
+  data() {
+    return {
+      data: '',
+    }
+  },
+  async mounted() {
+    await this.$store.dispatch('setLatAndLon', 'Petrozavodsk');
+  }
 }
 </script>
 
