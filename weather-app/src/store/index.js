@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     KEY: '08789ab932af5d6de716da1eaa4cfca7',
+    data: {},
     currentPosition: '',
     lat: 0,
     lon: 0,
@@ -11,6 +12,9 @@ export default createStore({
   getters: {
     KEY: state => {
       return state.KEY;
+    },
+    data: state => {
+      return state.data;
     },
     currentPosition: state => {
       return state.currentPosition;
@@ -29,6 +33,9 @@ export default createStore({
     setCurrentPosition: (state, payload) => {
       state.currentPosition = payload;
     },
+    setData: (state, payload) => {
+      state.data = payload;
+    },
     setLat: (state, payload) => {
       state.lat = payload;  
     },
@@ -44,7 +51,13 @@ export default createStore({
       const { lat, lon } = data[0];
       context.commit('setLat', lat);
       context.commit('setLon', lon);
-    }
+    },
+    setDataAsync: async (context, payload) => {
+      const URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${context.getters.lat}&lon=${context.getters.lon}&units=metric&lang=RU&appid=${context.getters.KEY}`;
+        const response = await fetch(URL);
+        const data = await response.json();
+        context.commit('setData', data);
+      }
   },
   modules: {
   }

@@ -17,6 +17,7 @@ export default {
     return {
       city: '',
       isError: false,
+      data: '',
     }
   },
   methods: {
@@ -24,6 +25,7 @@ export default {
       if (this.city.length > 0) {
         try {
           await this.$store.dispatch('setLatAndLon', this.city);
+          await this.$store.dispatch('setDataAsync');
           this.city = '';
         } catch {
           this.setIsError(true);
