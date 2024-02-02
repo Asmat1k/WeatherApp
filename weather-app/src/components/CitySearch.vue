@@ -1,7 +1,12 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <input type="text" name="city" id="city" v-model="city">
-    <button type="submit" class="">🔄</button>
+    <MyInput
+      id="city"
+      v-model="city"
+      maxlength="15"
+      :placeholder="'City'"
+    />
+    <MyButton type="submit" class="">update</MyButton>
   </form>
   <div v-if="isError" class="error">wrong place!</div>
 </template>
@@ -31,7 +36,6 @@ export default {
     }
   },
   async mounted() {
-    console.log('mounted');
     await this.$store.dispatch('setLatAndLon', 'Petrozavodsk');
   }
 } 
