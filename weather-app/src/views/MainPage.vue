@@ -1,31 +1,38 @@
 <template>
-  <div class="container">
-    <div class="wrapper">
+  <div class="section">
+    <div class="info">
       <CitySearch/>
+      <CurrentWeather/>
     </div>
   </div>
 </template>
 
 <script>
 import CitySearch from '@/components/CitySearch.vue'
+import CurrentWeather from '@/components/CurrentWeather.vue';
 
 export default {
   name: 'MainView',
   components: {
-    CitySearch
-  }
+    CitySearch,
+    CurrentWeather
+}
 }
 </script>
 
 <style scoped>
-.container {
+.section {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   padding: 0 15px;
 }
-.wrapper {
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
   background-color: rgb(87, 174, 255);
   width: 320px;
   height: 70vh;
