@@ -66,6 +66,7 @@ export default createStore({
         const response = await fetch(URL);
         const data = await response.json();
         const { lat, lon } = data[0];
+
         context.commit('setLat', lat);
         context.commit('setLon', lon);
       } catch(err) {
@@ -78,7 +79,6 @@ export default createStore({
         const URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${context.getters.lat}&lon=${context.getters.lon}&units=metric&lang=EN&appid=${context.getters.KEY}`;
         const response = await fetch(URL);
         const data = await response.json();
-        console.log(data);
         
         const date = new Date();
         const day = `${date.getDate()}`.padStart(2,0);

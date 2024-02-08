@@ -1,9 +1,12 @@
 <template>
   <div class="section">
-    <div class="info">
+    <div v-if="!computedIsLoading" class="info">
       <CitySearch/>
       <CurrentWeather/>
       <DailyWeather/>
+    </div>
+    <div v-else class="info loader">
+      <div class="spinner"></div>
     </div>
   </div>
 </template>
@@ -19,7 +22,15 @@ export default {
     CitySearch,
     CurrentWeather,
     DailyWeather
-}
+  },
+  async mounted() {
+    await this.$store.dispatch('setDataAsync');
+  },
+  computed: {
+    computedIsLoading() {
+      return this.$store.getters.isLoading;
+    }
+  }
 }
 </script>
 
@@ -39,9 +50,28 @@ export default {
   background-color: rgb(87, 174, 255);
   width: 320px;
   max-height: 100%;
+  min-height: 540px;
   
   border-radius: 10px;
 
   padding: 10px 15px;
 }
+.loader {
+  align-items: center;
+  justify-content: center;
+}
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 8px #474bff double;
+    border-left-style: solid;
+    border-radius: 50%;
+    animation: spinner-aib1d7 0.8999999999999999s infinite linear;
+  }
+
+  @keyframes spinner-aib1d7 {
+    to {
+        transform: rotate(360deg);
+    }
+  }
 </style>
