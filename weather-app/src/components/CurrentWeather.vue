@@ -6,14 +6,14 @@
         <div class="date">{{ this.$store.getters.requestDate }}</div>
         <div class="temp">
           {{ computedWeather.current.temp }}°
-        </div>
-        <div class="info">
-          <div class="description">{{ computedWeather.current.weather[0].description }}</div>
           <img 
             :src="'https://openweathermap.org/img/wn/' + computedWeather.current.weather[0].icon + '@2x.png'"
             alt="weather icon" 
             class="icon"
           >
+        </div>
+        <div class="info">
+          {{ computedWeather.current.weather[0].description }}
         </div>
       </main>
     </div>
@@ -60,19 +60,21 @@ export default {
     font-size: 10px;
   }
   .temp {
+    position: relative;
+
     font-weight: 900;
     font-size: 100px;
     line-height: 90px;
+    min-width: 100%;
     color: blue;
   }
-  .info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 250px;
-    max-height: 50px;
+  .icon {
+    position: absolute;
+    right: -10px;
+    bottom: -30px;
   }
-  .description {
-    font-size: 20px;
+  .info {
+    text-align: center;
+    font-size: 15px;
   }
 </style>
