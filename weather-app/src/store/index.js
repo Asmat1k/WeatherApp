@@ -61,30 +61,38 @@ export default createStore({
     setLatAndLon: async (context, payload) => {
       const position = payload ? payload : context.getters.currentPosition;
       context.commit('setCurrentPosition', position);
-      const URL = `https://api.openweathermap.org/geo/1.0/direct?q=${position}&limit=5&appid=${context.getters.KEY}`;
-      const response = await fetch(URL);
-      const data = await response.json();
-      const { lat, lon } = data[0];
-      context.commit('setLat', lat);
-      context.commit('setLon', lon);
+      try {
+        const URL = `https://api.openweathermap.org/geo/1.0/direct?q=${position}&limit=5&appid=${context.getters.KEY}`;
+        const response = await fetch(URL);
+        const data = await response.json();
+        const { lat, lon } = data[0];
+        context.commit('setLat', lat);
+        context.commit('setLon', lon);
+      } catch(err) {
+        console.error('Error failed to fetch in "setLatAndLon" function...', err)
+      }
     },
     setDataAsync: async (context, payload) => {
       context.commit('setIsLoading', true);
-      const URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${context.getters.lat}&lon=${context.getters.lon}&units=metric&lang=EN&appid=${context.getters.KEY}`;
-      const response = await fetch(URL);
-      const data = await response.json();
-      console.log(data);
-      
-      const date = new Date();
-      const day = `${date.getDate()}`.padStart(2,0);
-      const month =  `${date.getMonth() + 1}`.padStart(2,0);
-      const hour = `${date.getHours()}`.padStart(2,0);
-      const min = `${date.getMinutes()}`.padStart(2,0);
-      const formatDate = `${day}.${month} at ${hour}:${min}`;
-      context.commit('setRequestDate', formatDate);
+      try {
+        const URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${context.getters.lat}&lon=${context.getters.lon}&units=metric&lang=EN&appid=${context.getters.KEY}`;
+        const response = await fetch(URL);
+        const data = await response.json();
+        console.log(data);
+        
+        const date = new Date();
+        const day = `${date.getDate()}`.padStart(2,0);
+        const month =  `${date.getMonth() + 1}`.padStart(2,0);
+        const hour = `${date.getHours()}`.padStart(2,0);
+        const min = `${date.getMinutes()}`.padStart(2,0);
+        const formatDate = `${day}.${month} at ${hour}:${min}`;
+        context.commit('setRequestDate', formatDate);
 
-      context.commit('setData', data);
-      context.commit('setIsLoading', false);
+        context.commit('setData', data);
+        context.commit('setIsLoading', false);
+      } catch(err) {
+        console.error('Error failed to fetch in "setDataAsync" function...', err)
+      }
     }
   },
   modules: {

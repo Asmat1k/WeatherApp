@@ -35,7 +35,7 @@ export default {
 
   background-color: rgb(87, 174, 255);
   width: 320px;
-  height: 70vh;
+  height: 500px;
   
   border-radius: 10px;
 
