@@ -9,6 +9,10 @@
   padding: 0;
   margin: 0;
   text-decoration: none;
-  text-transform: none  ;
+  text-transform: none;
+}
+body {
+  user-select: none; 
+  background-color: rgb(198, 242, 255);
 }
 </style>
