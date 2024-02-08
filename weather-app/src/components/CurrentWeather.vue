@@ -73,6 +73,11 @@ export default {
     position: absolute;
     right: -10px;
     bottom: -30px;
+
+    transition: .3s;
+  }
+  .icon:active {
+    transform: rotate(5deg)
   }
   .info {
     text-align: center;

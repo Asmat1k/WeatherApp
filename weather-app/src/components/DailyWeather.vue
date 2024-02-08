@@ -18,11 +18,11 @@
           <div class="temp__list">
             <div class="temp__item">
               <div class="name">Day</div>
-              <div class="temp temp-day">{{ day.temp.day }}</div>
+              <div class="temp temp-day">{{ day.temp.day }}°</div>
             </div>
             <div class="temp__item">
               <div class="name">Night</div>
-              <div class="temp temp-night">{{ day.temp.night }}</div>
+              <div class="temp temp-night">{{ day.temp.night }}°</div>
             </div>
           </div>
         </div>
@@ -66,6 +66,10 @@ export default {
     border-radius: 5px;
 
     width: 100%;
+    transition: .5s;
+  }
+  .day:hover {
+    transform: scale(1.05);
   }
   .date {
     font-size: 12px;
@@ -74,10 +78,11 @@ export default {
   .right {
     display: flex;
     align-items: center;
+    gap: 5px;
   }
   .temp__list {
     display: flex;
-    gap: 5px;
+    gap: 2px;
   }
   .temp__item {
     text-align: center;

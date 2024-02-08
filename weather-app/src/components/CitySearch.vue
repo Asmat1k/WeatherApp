@@ -15,7 +15,7 @@ export default {
   name: 'CitySearch',
   data() {
     return {
-      city: '',
+      city: this.$store.getters.currentPosition,
       isError: false,
       data: '',
     }
@@ -36,9 +36,6 @@ export default {
       this.isError = payload;
     }
   },
-  async mounted() {
-    await this.$store.dispatch('setLatAndLon', 'Petrozavodsk');
-  }
 } 
 </script>
 

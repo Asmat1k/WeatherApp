@@ -6,7 +6,7 @@ export default createStore({
     data: {},
     requestDate: '',
     isLoading: false,
-    currentPosition: 'Petrozavodsk',
+    currentPosition: 'Saint-Petersburg',
     lat: 0,
     lon: 0,
     units: 'metric'

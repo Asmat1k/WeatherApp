@@ -24,6 +24,7 @@ export default {
     DailyWeather
   },
   async mounted() {
+    await this.$store.dispatch('setLatAndLon');
     await this.$store.dispatch('setDataAsync');
   },
   computed: {
