@@ -5,6 +5,7 @@ export default createStore({
     KEY: '08789ab932af5d6de716da1eaa4cfca7',
     data: {},
     requestDate: '',
+    isLoading: false,
     currentPosition: 'Petrozavodsk',
     lat: 0,
     lon: 0,
@@ -19,6 +20,9 @@ export default createStore({
     },
     requestDate: state => {
       return state.requestDate;
+    },
+    isLoading: state => {
+      return state.isLoading;
     },
     currentPosition: state => {
       return state.currentPosition;
@@ -43,6 +47,9 @@ export default createStore({
     setRequestDate: (state, payload) => {
       state.requestDate = payload;
     },
+    setIsLoading: (state, payload) => {
+      state.isLoading = payload;
+    },
     setLat: (state, payload) => {
       state.lat = payload;  
     },
@@ -62,6 +69,7 @@ export default createStore({
       context.commit('setLon', lon);
     },
     setDataAsync: async (context, payload) => {
+      context.commit('setIsLoading', true);
       const URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${context.getters.lat}&lon=${context.getters.lon}&units=metric&lang=EN&appid=${context.getters.KEY}`;
       const response = await fetch(URL);
       const data = await response.json();
@@ -75,8 +83,8 @@ export default createStore({
       const formatDate = `${day}.${month} at ${hour}:${min}`;
       context.commit('setRequestDate', formatDate);
 
-      localStorage.setItem('data', JSON.stringify(data));
       context.commit('setData', data);
+      context.commit('setIsLoading', false);
     }
   },
   modules: {

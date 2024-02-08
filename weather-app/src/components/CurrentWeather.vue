@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-if="computedWeather && computedWeather.current" class="wrapper">
+    <div v-if="computedWeather && computedWeather.current && !computedIsLoading" class="wrapper">
       <main class="main">
         <div class="city">{{ this.$store.getters.currentPosition }}</div>
         <div class="date">{{ this.$store.getters.requestDate }}</div>
@@ -17,7 +17,9 @@
         </div>
       </main>
     </div>
-    <div v-else class="">loading</div>
+    <div v-else class="container">
+      <div class="spinner"></div>
+    </div>
   </div>
 </template>
 
@@ -30,6 +32,9 @@ export default {
   computed: {
     computedWeather() {
       return this.$store.getters.data ? this.$store.getters.data : JSON.parse(localStorage.getItem('data'));
+    },
+    computedIsLoading() {
+      return this.$store.getters.isLoading;
     }
   }
 }
@@ -37,7 +42,12 @@ export default {
 
 <style scoped>
   .container {
-    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 90%;
+
     padding: 0;
     color: white;
   }
@@ -76,5 +86,19 @@ export default {
   .info {
     text-align: center;
     font-size: 15px;
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 8px #474bff double;
+    border-left-style: solid;
+    border-radius: 50%;
+    animation: spinner-aib1d7 0.8999999999999999s infinite linear;
+  }
+
+  @keyframes spinner-aib1d7 {
+    to {
+        transform: rotate(360deg);
+    }
   }
 </style>
