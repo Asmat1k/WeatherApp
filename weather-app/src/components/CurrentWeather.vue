@@ -46,7 +46,7 @@ export default {
     align-items: center;
     justify-content: center;
 
-    height: 90%;
+    max-height: 100%;
 
     padding: 0;
     color: white;

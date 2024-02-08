@@ -3,6 +3,7 @@
     <div class="info">
       <CitySearch/>
       <CurrentWeather/>
+      <DailyWeather/>
     </div>
   </div>
 </template>
@@ -10,12 +11,14 @@
 <script>
 import CitySearch from '@/components/CitySearch.vue'
 import CurrentWeather from '@/components/CurrentWeather.vue';
+import DailyWeather from '@/components/DailyWeather.vue';
 
 export default {
   name: 'MainView',
   components: {
     CitySearch,
-    CurrentWeather
+    CurrentWeather,
+    DailyWeather
 }
 }
 </script>
@@ -35,7 +38,7 @@ export default {
 
   background-color: rgb(87, 174, 255);
   width: 320px;
-  height: 500px;
+  max-height: 100%;
   
   border-radius: 10px;
 
